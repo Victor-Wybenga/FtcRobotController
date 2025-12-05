@@ -32,14 +32,14 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.mechanisms.TestBench;
+import org.firstinspires.ftc.teamcode.mechanics.Mechanics;
 
 @TeleOp(name = "Motor Test", group = "Newman")
 public class MotorTest extends OpMode {
-    private TestBench bench;
+    private Mechanics mechanics;
 
     @Override public void init() {
-        bench = new TestBench(hardwareMap);
+        mechanics = new Mechanics(hardwareMap);
     }
 
     @Override public void loop() {
@@ -48,7 +48,7 @@ public class MotorTest extends OpMode {
                 "GamePad",
                 String.format("Left: %f, Right: %f", gamepad1.left_trigger, gamepad1.right_trigger)
         );
-        bench.setMotorSpeed(-gamepad1.left_trigger, gamepad1.right_trigger);
+        mechanics.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x);
         telemetry.addData("A Button", gamepad1.a);
     }
 
