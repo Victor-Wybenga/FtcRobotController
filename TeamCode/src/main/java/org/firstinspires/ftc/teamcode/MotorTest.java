@@ -32,23 +32,23 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.mechanics.Mechanics;
+import org.firstinspires.ftc.teamcode.mechanics.Motors;
 
 @TeleOp(name = "Motor Test", group = "Newman")
 public class MotorTest extends OpMode {
-    private Mechanics mechanics;
+    private Motors motors;
 
     @Override public void init() {
-        mechanics = new Mechanics(hardwareMap);
+        motors = new Motors(hardwareMap);
     }
 
     @Override public void loop() {
 
         telemetry.addData(
                 "GamePad",
-                String.format("Left: %f, Right: %f", gamepad1.left_trigger, gamepad1.right_trigger)
+                String.format("Throttle: %f, Direction: %f", gamepad1.left_stick_y, gamepad1.left_stick_x)
         );
-        mechanics.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x);
+        motors.drive(gamepad1.left_stick_y, gamepad1.left_stick_x);
         telemetry.addData("A Button", gamepad1.a);
     }
 
