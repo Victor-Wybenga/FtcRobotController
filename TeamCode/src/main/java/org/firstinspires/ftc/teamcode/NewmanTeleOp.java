@@ -32,24 +32,34 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.mechanics.Motors;
+import org.firstinspires.ftc.teamcode.mechanics.AprilTagWebcam;
+import org.firstinspires.ftc.teamcode.mechanics.DcMotors;
+import org.firstinspires.ftc.teamcode.mechanics.ServoMotors;
 
-@TeleOp(name = "Motor Test", group = "Newman")
-public class MotorTest extends OpMode {
-    private Motors motors;
+@TeleOp(name = "Newman TeleOP", group = "Newman")
+public class NewmanTeleOp extends OpMode {
+    private DcMotors dcMotors;
+    private ServoMotors servoMotors;
+    private AprilTagWebcam aprilTagWebcam;
 
     @Override public void init() {
-        motors = new Motors(hardwareMap);
+        dcMotors = new DcMotors(hardwareMap, telemetry);
+        servoMotors = new ServoMotors(hardwareMap, telemetry);
+//        aprilTagWebcam = new AprilTagWebcam(hardwareMap, telemetry);
     }
 
     @Override public void loop() {
+        telemetry.addData("Game Pad Left Stick", "(Throttle: %6.2f, Direction: %6.2f)",
+                gamepad1.left_stick_y, gamepad1.left_stick_x
+        );
 
         telemetry.addData(
-                "GamePad",
-                String.format("Throttle: %f, Direction: %f", gamepad1.left_stick_y, gamepad1.left_stick_x)
+                "Game Pad Right Trigger", "(Strength: %6.2f)",
+                gamepad1.right_trigger
         );
-        motors.drive(gamepad1.left_stick_y, gamepad1.left_stick_x);
-        telemetry.addData("A Button", gamepad1.a);
+
+        dcMotors.shoot(gamepad1.right_trigger);
+        dcMotors.drive(gamepad1.left_stick_y, gamepad1.left_stick_x);
     }
 
 }
