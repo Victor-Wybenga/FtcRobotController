@@ -12,6 +12,8 @@ public class DcMotors {
     private static final double ROTATION_DAMPENING = 1.0;
     private static final double MAX_SPEED = 1.0;
     private final DcMotor left_motor, right_motor, shooter_motor;
+
+    private final double shooter_ticks_per_revolution;
     private final Telemetry telemetry;
 
     public DcMotors(HardwareMap hardwareMap, Telemetry telemetry) {
@@ -29,6 +31,8 @@ public class DcMotors {
         shooter_motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         left_motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         right_motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        shooter_ticks_per_revolution = shooter_motor.getMotorType().getTicksPerRev();
     }
 
     public void shoot(double strength) {

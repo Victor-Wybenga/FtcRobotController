@@ -44,21 +44,21 @@ public class AprilTagWebcam {
         detections = aprilTagProcessor.getDetections();
     }
 
-    public void telemetry(AprilTagDetection detection) {
+    public void telemetry_of(AprilTagDetection detection) {
         if (detection.metadata == null) {
-            telemetry.addData("\n=== Unknown", "(ID: %d) ===", detection.id);
-            telemetry.addData("Center", "(X: %6.0f px, Y: %6.0f px)",
+            telemetry.addData("Unknown Tag", "\n\tID: %d", detection.id);
+            telemetry.addData("\tCenter Pixels", "\n\t\tX: %.0f px\n\t\tY: %.0f px",
                     detection.center.x, detection.center.y
             );
         } else {
-            telemetry.addData("\n=== Known", "(ID: %d) ===", detection.id);
-            telemetry.addData("Position", "(X: %6.1f cm, Y: %6.1f cm, Z: %6.1f cm)",
+            telemetry.addData("Known Tag", "\n\tID: %d", detection.id);
+            telemetry.addData("\tPosition", "\n\t\tX: %.1f cm\n\t\tY: %.1f cm\n\t\tZ: %.1f cm",
                     detection.ftcPose.x, detection.ftcPose.y, detection.ftcPose.z
             );
-            telemetry.addData("Rotation", "(Pitch: %6.1f deg, Roll: %6.1f deg, Yaw: %6.1f deg)",
+            telemetry.addData("\tRotation", "\n\t\tPitch: %.1f deg\n\t\tRoll: %.1f deg\n\t\tYaw: %6.1f deg",
                     detection.ftcPose.pitch, detection.ftcPose.roll, detection.ftcPose.yaw
             );
-            telemetry.addData("Polar", "(Range: %6.1f cm, Azimuth: %6.1f deg, Elevation: %6.1f deg)",
+            telemetry.addData("\tPolar", "\n\t\tRange: %.1f cm\n\t\tAzimuth: %.1f deg\n\t\tElevation: %.1f deg",
                     detection.ftcPose.range, detection.ftcPose.bearing, detection.ftcPose.elevation
             );
         }

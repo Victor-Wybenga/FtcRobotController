@@ -45,18 +45,26 @@ public class NewmanTeleOp extends OpMode {
     @Override public void init() {
         dcMotors = new DcMotors(hardwareMap, telemetry);
         servoMotors = new ServoMotors(hardwareMap, telemetry);
-//        aprilTagWebcam = new AprilTagWebcam(hardwareMap, telemetry);
+        aprilTagWebcam = new AprilTagWebcam(hardwareMap, telemetry);
     }
 
     @Override public void loop() {
-        telemetry.addData("Game Pad Left Stick", "(Throttle: %6.2f, Direction: %6.2f)",
+        telemetry.addData("Game Pad Left Stick", "\n\tThrottle: %.2f\n\tDirection: %.2f",
                 gamepad1.left_stick_y, gamepad1.left_stick_x
         );
 
-        telemetry.addData(
-                "Game Pad Right Trigger", "(Strength: %6.2f)",
+        telemetry.addData("Game Pad Right Trigger", "\n\tPower: %.2f",
                 gamepad1.right_trigger
         );
+
+        telemetry.addData(
+                "Game Pad Buttons", "\n\tA: %s\n\tB: %s",
+                gamepad1.a ? "Pressed" : "Not Pressed",
+                gamepad1.b ? "Pressed" : "Not Pressed"
+        );
+
+        servoMotors.set_indexer_servos(gamepad1.a ? 1.0 : 0.5);
+        servoMotors.set_origin_servo(gamepad1.b ? 1.0 : 0.5);
 
         dcMotors.shoot(gamepad1.right_trigger);
         dcMotors.drive(gamepad1.left_stick_y, gamepad1.left_stick_x);
