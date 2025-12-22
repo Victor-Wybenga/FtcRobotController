@@ -54,7 +54,7 @@ public class NewmanAutonomous extends OpMode {
             case TURN:
                 if (!currentDetection.isPresent()) state = RobotState.NOT_FOUND;
                 else if (abs(currentDetection.get().ftcPose.bearing) <= 3.0) state = RobotState.RUN;
-                else dcMotors.drive(0.0, 0.3 * -signum(currentDetection.get().ftcPose.bearing));
+                else dcMotors.drive(0.0, 0.1 * -signum(currentDetection.get().ftcPose.bearing));
                 break;
             case NOT_FOUND:
                 if (currentDetection.isPresent()) state = RobotState.RUN;
@@ -63,19 +63,22 @@ public class NewmanAutonomous extends OpMode {
             case IN_RANGE:
                 dcMotors.drive(0.0, 0.0);
                 shoot_time.reset();
+                state = RobotState.SHOOT;
                 break;
             case SHOOT:
                 dcMotors.drive(0.0, 0.0);
-                if (shoot_time.seconds() >= 5.0) state = RobotState.STOP;
+                if (shoot_time.seconds() >= 8.0) state = RobotState.STOP;
                 else {
                     servoMotors.set_indexer_servos(1.0);
                     servoMotors.set_origin_servo(1.0);
+                    dcMotors.shoot(1.0);
                 }
                 break;
             case STOP:
                 dcMotors.drive(0.0, 0.0);
                 servoMotors.set_indexer_servos(0.5);
                 servoMotors.set_origin_servo(0.5);
+                dcMotors.shoot(0.0);
                 break;
         }
     }
