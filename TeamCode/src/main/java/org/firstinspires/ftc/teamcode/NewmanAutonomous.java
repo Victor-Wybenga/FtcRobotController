@@ -14,6 +14,12 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
 import java.util.Optional;
 
+/*
+ * TODO:
+ *
+ */
+
+
 enum RobotState {RUN, TURN, NOT_FOUND, IN_RANGE, SHOOT, STOP}
 
 @Autonomous(name = "Newman Autonomous", group = "Newman")

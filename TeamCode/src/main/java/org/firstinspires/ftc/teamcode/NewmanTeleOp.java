@@ -64,7 +64,7 @@ public class NewmanTeleOp extends OpMode {
         );
 
         servoMotors.set_indexer_servos(gamepad1.a ? 1.0 : 0.5);
-        servoMotors.set_origin_servo(gamepad1.b ? 1.0 : 0.5);
+        servoMotors.set_origin_servo(gamepad1.a ? 1.0 : 0.5);
 
         dcMotors.shoot(gamepad1.right_trigger);
         dcMotors.drive(gamepad1.left_stick_y, gamepad1.left_stick_x);
