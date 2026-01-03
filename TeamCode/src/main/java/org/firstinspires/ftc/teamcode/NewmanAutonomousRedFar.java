@@ -1,0 +1,25 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
+import org.firstinspires.ftc.teamcode.autonomous.NewmanAutonomous;
+import org.firstinspires.ftc.teamcode.autonomous.RobotTeam;
+import org.firstinspires.ftc.teamcode.pathing.PathDirection;
+import org.firstinspires.ftc.teamcode.pathing.PathPart;
+import org.firstinspires.ftc.teamcode.pathing.PathRotation;
+
+@SuppressWarnings("unused")
+@Autonomous(name = "Autonomous: Red, Far Position", group = "Newman")
+public class NewmanAutonomousRedFar extends NewmanAutonomous {
+    @Override public void setup() {
+        forward_path = new PathPart[]{
+            PathPart.Drive(PathDirection.FORWARD, 6.0),
+            PathPart.Rotate(PathRotation.RIGHT, 45.0)
+        };
+        reverse_path = new PathPart[]{
+            PathPart.Rotate(PathRotation.LEFT, 45.0),
+            PathPart.Drive(PathDirection.REVERSE, 6.0)
+        };
+        robot_team = RobotTeam.RED;
+    }
+}

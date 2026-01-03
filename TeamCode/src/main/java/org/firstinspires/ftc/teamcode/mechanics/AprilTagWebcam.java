@@ -17,15 +17,15 @@ import java.util.List;
 import java.util.Optional;
 
 public class AprilTagWebcam {
-    private final AprilTagProcessor aprilTagProcessor;
-    private final VisionPortal visionPortal;
+    private final AprilTagProcessor april_tag_processor;
+    private final VisionPortal vision_portal;
     private List<AprilTagDetection> detections = new ArrayList<>();
 
     private final Telemetry telemetry;
 
     public AprilTagWebcam(HardwareMap hardwareMap, Telemetry telemetry) {
         this.telemetry = telemetry;
-        aprilTagProcessor = new AprilTagProcessor.Builder()
+        april_tag_processor = new AprilTagProcessor.Builder()
                 .setDrawTagID(true)
                 .setDrawTagOutline(true)
                 .setDrawAxes(true)
@@ -33,15 +33,15 @@ public class AprilTagWebcam {
                 .setOutputUnits(DistanceUnit.CM, AngleUnit.DEGREES)
                 .build();
 
-        visionPortal = new VisionPortal.Builder()
+        vision_portal = new VisionPortal.Builder()
                 .setCamera(hardwareMap.get(WebcamName.class, "webcam"))
                 .setCameraResolution(new Size(640, 480))
-                .addProcessor(aprilTagProcessor)
+                .addProcessor(april_tag_processor)
                 .build();
     }
 
     public void update() {
-        detections = aprilTagProcessor.getDetections();
+        detections = april_tag_processor.getDetections();
     }
 
     public void telemetry_of(AprilTagDetection detection) {
@@ -64,11 +64,11 @@ public class AprilTagWebcam {
         }
     }
 
-    public List<AprilTagDetection> getDetections() {
+    public List<AprilTagDetection> get_detections() {
         return detections;
     }
 
-    public Optional<AprilTagDetection> getTagByID(int id) {
+    public Optional<AprilTagDetection> get_tag_by_id(int id) {
         return detections
                 .stream()
                 .filter(detection -> detection.id == id)
@@ -76,6 +76,6 @@ public class AprilTagWebcam {
     }
 
     public void stop() {
-        if (visionPortal != null) visionPortal.close();
+        if (vision_portal != null) vision_portal.close();
     }
 }
