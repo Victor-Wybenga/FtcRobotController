@@ -16,8 +16,9 @@ public class NewmanAutonomousBlueGoal extends NewmanAutonomous {
             PathPart.Drive(PathDirection.REVERSE, 2.0)
         };
         reverse_path = new PathPart[]{
+            PathPart.Drive(PathDirection.REVERSE, 1.2),
             PathPart.Rotate(PathRotation.RIGHT, 45.0),
-            PathPart.Drive(PathDirection.REVERSE, 6.0)
+            PathPart.Drive(PathDirection.REVERSE, 4.0)
         };
         robot_team = RobotTeam.BLUE;
     }
