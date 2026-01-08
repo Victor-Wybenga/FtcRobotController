@@ -35,7 +35,6 @@ public abstract class NewmanAutonomous extends OpMode {
     private DcMotors dc_motors;
     private ServoMotors servo_motors;
     private RobotState robot_state = RobotState.FORWARD_PATH;
-    private Optional<AprilTagDetection> current_detection;
 
     abstract protected void setup();
 
@@ -45,10 +44,7 @@ public abstract class NewmanAutonomous extends OpMode {
         servo_motors = new ServoMotors(hardwareMap, telemetry);
         dc_motors = new DcMotors(hardwareMap, telemetry);
 
-        april_tag_webcam.update();
-        current_detection = april_tag_webcam.get_tag_by_id(robot_team.tag_id());
         telemetry.addData("State", robot_state.name());
-        current_detection.ifPresent(detection -> april_tag_webcam.telemetry_of(detection));
     }
 
     @Override public void start() {
@@ -104,7 +100,7 @@ public abstract class NewmanAutonomous extends OpMode {
 
     @Override public void loop() {
         april_tag_webcam.update();
-        current_detection = april_tag_webcam.get_tag_by_id(robot_team.tag_id());
+        Optional<AprilTagDetection> current_detection = april_tag_webcam.get_tag_by_id(robot_team.tag_id());
 
         telemetry.addData("State", robot_state.name());
         telemetry.addData("State Time", state_time);

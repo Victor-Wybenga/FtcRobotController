@@ -19,7 +19,7 @@ public class NewmanAutonomousBlueFar extends NewmanAutonomous {
         reverse_path = new PathPart[] {
             PathPart.Drive(PathDirection.REVERSE, 1.2),
             PathPart.Rotate(PathRotation.RIGHT, 45.0),
-            PathPart.Drive(PathDirection.REVERSE, 4.0)
+            PathPart.Drive(PathDirection.REVERSE, 3.0)
         };
         robot_team = RobotTeam.BLUE;
     }

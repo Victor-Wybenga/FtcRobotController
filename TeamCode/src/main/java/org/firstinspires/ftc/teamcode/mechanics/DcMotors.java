@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class DcMotors {
-    private static final double ROTATION_DAMPENING = 1.0;
     private static final double MAX_SPEED = 1.0;
 
     public static final double ROBOT_SECONDS_PER_FEET = 0.48;
@@ -67,8 +66,6 @@ public class DcMotors {
     }
 
     public void drive(double throttle, double rotation) {
-        rotation /= ROTATION_DAMPENING;
-
         final double left_power = Range.clip(
                 (throttle + rotation) * MAX_SPEED,
                 -1.0,
